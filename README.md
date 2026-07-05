@@ -1,2 +1,2 @@
 # Python-projects
-Repository that contains my python projects done for Harvard's CS50P course
+This repo contains my python projects, completed as part of Harvard's CS50P, Introduction to Programming with Python
