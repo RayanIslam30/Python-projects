@@ -2,8 +2,8 @@
 
 user_input = input("Enter your equation, with a space between each number and operator: ") #Take the input from the user
 x, y, z = user_input.split()
-x = int(x)
-z = int(z)
+x = float(x)
+z = float(z)
 
 #ifelse statement to check the operator and perform the corresponding operation
 if y == "+":
