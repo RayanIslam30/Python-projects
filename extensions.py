@@ -17,4 +17,4 @@ elif clean_file_input.endswith(".doc") or clean_file_input.endswith(".docx"):
 elif clean_file_input.endswith(".zip"):
     print("application/zip")
 else:
-    print("Unknown file type")
+    print("application/octet-stream")
