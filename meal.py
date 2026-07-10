@@ -5,8 +5,8 @@ def main():
     time = input("What time is it? ").lower().strip() #Prompt the user for input and convert it to lowercase and remove whitespace
     if time.endswith("am") or time.endswith("pm"): #Code to run if the time is in AM or PM format, convert to 24h format
         converted_time = convert12h(time)
-    else: #Code to run if the time is in 24h format   
-        converted_time = convert24h(time)
+    else: #Code to run if the time is in 24h format, considered default
+        converted_time = convert(time)
     if 7 <= converted_time <= 8:
         print("breakfast time")
     elif 12 <= converted_time <= 13:
@@ -16,7 +16,7 @@ def main():
     else:
         pass #If the time is not in any of the above ranges, do nothing
 
-def convert24h(x):
+def convert(x):
     #Convert the time to a float
     hours, minutes = x.split(":")
     minutes = float(minutes)/60 #Convert the minutes to a decimal value
@@ -32,4 +32,5 @@ def convert12h(x):
         hours = "0"
     return float(hours) + minutes
 
-main()
+if __name__ == "__main__": #If the script is run directly, call the main function
+    main()
