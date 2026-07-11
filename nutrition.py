@@ -8,7 +8,7 @@ fruits = {
     "cantaloupe": 50,
     "grapefruit": 60,
     "grapes": 90,
-    "honeydew": 50,
+    "honeydew melon": 50,
     "kiwifruit": 90,
     "lemon": 15,
     "lime": 20,
@@ -24,6 +24,7 @@ fruits = {
     "watermelon": 80
 }
 
-fruit = input("Enter a fruit: ").strip().lower()
-if fruit in fruits:
-    print(f"Calories: {fruits[fruit]}")
+
+fruit = input("Enter a fruit: ").strip().lower() #Takes and cleans user input for a fruit name, converting it to lowercase and removing any leading or trailing whitespace
+if fruit in fruits: 
+    print(f"Calories: {fruits[fruit]}") #Checks if the fruit is in the dictionary and prints out the corresponding calorie count if it is
