@@ -13,12 +13,23 @@ def is_valid(plate):
         return False
     if not plate.isalnum(): #Checks if the plate contains only letters and numbers
         return False
-    if plate[0].isalpha() == False or plate[1].isalpha() == False: #Checks if the first two characters are letters
+    if not plate[0].isalpha() or not plate[1].isalpha(): #Checks if the first two characters are letters
         return False
-    if plate[0] == '0': #Checks if the first number is 0
-        return False
-    if any(char.isdigit() for char in plate[:-1]) and not plate[-1].isdigit(): #Checks if there are any digits in the plate except for the last character, and if the last character is not a digit
-        return False
-    return True
+    #Checks if the first number is 0
+    for i in range(len(plate)):
+        if plate[i].isdigit():
+            if plate[i] == '0':
+                return False
+            break #Takes us out of the loop once we find the first number, only returns False if the first number is 0
+
+    #Checks that after first number, all characters are numbers
+    for i in range(len(plate)):
+        if plate[i].isdigit():
+            for j in range(i, len(plate)):
+                if not plate[j].isdigit():
+                    return False
+            break #Takes us out of the loop, only returns false if any character after the first number is not a number
+
+    return True #If all checks pass, the plate is valid
 
 main()
