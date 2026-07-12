@@ -7,8 +7,9 @@ def main():
     else:
         print("Invalid")
 
+#Checks if the inputted plate meets all criteria for a valid vanity license plate, including length, allowed characters, and format
 def is_valid(plate):
-    #Checks if the plate is valid by checking the length, allowed characters, and format
+    #Checks if plate is valid length
     if len(plate) < 2 or len(plate) > 6:
         return False
     if not plate.isalnum(): #Checks if the plate contains only letters and numbers
