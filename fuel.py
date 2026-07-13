@@ -13,10 +13,11 @@ def convert(fraction):
         y = int(y)
         if y == 0:
             raise ZeroDivisionError
+        if (x/y) > 1 or (x/y) < 0: #If the fraction is greater than 1 or negative, raise a ValueError
+            raise ValueError
         return (x / y) * 100
-    except (ValueError, ZeroDivisionError):
-        print("Invalid input")
-        exit(1)
+    except (ValueError, ZeroDivisionError): #If an exception is raised, the program will ask for a fraction again
+        return convert(input("Fraction: "))
 
 #Returns the appropriate gauge reading
 def gauge(percentage):
@@ -26,3 +27,5 @@ def gauge(percentage):
         print("E")
     else:
         print(f"{percentage:.0f}%")
+
+main()
