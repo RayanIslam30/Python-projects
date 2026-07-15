@@ -15,12 +15,17 @@ menu = {
 
 #This variable is used to keep track of the total cost of the order. It is initialized to 0.0 at the beginning of the program.
 total = 0.0
+#This variable tracks what the user orders and is initialized to an empty list at the beginning of the program.
+orders = []
 #While loop that allows the user to order multiple items from the menu until they choose to quit by by inputting ctrl-d
 while True:
     try: 
         order = input("Enter an item to order: ").strip().title() #Takes and cleans user input for a menu item, converting it to title case and removing any leading or trailing whitespace
+        #Only take valid inputs from the user, if the input is not in the menu dictionary, it will not be added to the order and the user will be prompted to enter a valid item
         if order in menu:  
             total = menu[order] + total #Checks if the ordered item is in the menu dictionary and adds the price of that item to the total cost if it is
+            orders = orders + [order] #Adds the ordered item to the list of orders
+            print("Order:", ", ".join(orders)) #Prints out the current items in the order, in the order they were added, separated by commas
             print(f"Total: ${total:.2f}") #Prints out the total cost of the order, formatted to two decimal places
     except EOFError: #if user inputs ctrl-d, the program will exit the loop and end the program
         break
