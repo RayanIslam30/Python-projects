@@ -9,7 +9,7 @@ if len(sys.argv) == 3: #Check if user specified a font while running program
             sys.exit("Invalid usage")
         elif sys.argv[2] not in figlet.getFonts(): #If the font isn't valid, quit
             sys.exit("Invalid usage")
-        else #Valid font, use that font and output text
+        else: #Valid font, use that font and output text
             text = input("Input: ") #Get user input to prepare for converting 
             figlet.setFont(font=sys.argv[2]) #set font to user specified font
             print(figlet.renderText(text)) #print figlet
