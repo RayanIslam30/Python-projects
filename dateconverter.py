@@ -37,13 +37,15 @@ def convert(date):
         year = int(year)
         if month < 1 or month > 12 or day < 1 or day > 31: #If day or month not valid, raise exception
             raise ValueError
-    elif len(parts) == 3 and parts[0] in months: #Case to convert if user inputted actual month name, check if that is in our months dictionary and that input is a valid date
+    elif len(parts) == 3 and parts[0] in months and parts[1].endswith(","): #Case to convert if user inputted actual month name, check if that is in our months dictionary and that input has valid formatting
         month_name = parts[0] #month
         day = parts[1].rstrip(",")
         year = parts[2]
         month = months[month_name]
         day = int(day)
         year = int(year)
+        if day < 1 or day > 31: #Check for invalid day
+            raise ValueError
     else: #If date is invalid, ask for date again, raise exception
         raise ValueError
 
