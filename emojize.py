@@ -1,4 +1,4 @@
-#Code that takes an emoji name and converts it to the actual emoji
+#Code that takes an emoji name and converts it to the actual emoji, using a library of emojis and their associated name
 
 import emoji #Import emoji module which we use to convert
 
