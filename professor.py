@@ -23,6 +23,8 @@ def main():
                 break
             else:
                 print("EEE")
+        else: #If they get it wrong three times, tell them the answer
+            print(f"{x} + {y} = {x + y}")
     print(f"Score: {score}")
 
 #Function to get our level
