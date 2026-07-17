@@ -33,4 +33,5 @@ def is_valid(plate):
 
     return True #If all checks pass, the plate is valid
 
-main()
+if __name__ == "__main__": #Only run main if file ran directly
+    main()
