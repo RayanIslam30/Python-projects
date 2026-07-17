@@ -16,5 +16,5 @@ try:
     price = float(response.json()["data"]["priceUsd"]) #Get current price of one bitcoin
     cost = n * price
     print(f"${cost:,.4f}")
-except requests.RequestException:
+except requests.RequestException: #If API call fails, say that
     print("Request failed")
