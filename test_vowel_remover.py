@@ -1,5 +1,5 @@
 #Code to test our vowel_remover program using pytest
-from vowel_remover import shorten #Test the shorten function from vowel_remover
+from vowel_remover import shorten #Import the shorten function from vowel_remover
 
 #Our tests of the shorten function
 def test_shorten():
@@ -8,3 +8,4 @@ def test_shorten():
         assert shorten("aeiouAEIOU") == "" #Test all vowels removed
         assert shorten("Testing.") == "Tstng." #Test punctuation
         assert shorten("abc123") == "bc123" #Test numbers
+        
