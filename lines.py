@@ -21,10 +21,13 @@ if not name.endswith(".py"):
 try:
     with open(name) as file:
        for line in file: 
-            lines+=1 
+            if line.strip().startswith("#"): #If line is a comment, don't count it
+                pass
+            elif line.strip() == "": #If line is blank, don't count it
+                pass
+            else: #Otherwise, count it
+                lines+=1 
 except FileNotFoundError: #If file doesn't exist, quit 
     sys.exit("File does not exist")
 
-
-
-print(lines)
+print(lines)#Print our amount of lines
