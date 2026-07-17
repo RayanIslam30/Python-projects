@@ -11,9 +11,12 @@ elif len(sys.argv) == 1: #If sys.argv[1] doesn't exist, quit with too few argume
 else: #If there are more than 1 argument, quit with too many arguments
     sys.exit("Too many command-line arguments")
 
+#Make sure the file is actually a .py file
+if not name.endswith(".py"):
+    sys.exit("Not a Python file")
 #Open the file and read it
 with open(name) as file:
-#Imp
+#
     for line in file: 
         lines+=1 
 
