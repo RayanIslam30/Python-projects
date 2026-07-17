@@ -1,7 +1,7 @@
 #Code to test our vowel_remover program using pytest
-from vowel_remover import shorten #Test the shorten function in vowel_remover
+from vowel_remover import shorten #Test the shorten function from vowel_remover
 
-#Our test of the shorten function
+#Our tests of the shorten function
 def test_shorten():
         assert shorten("cat") == "ct" #Test lowercase 'a'
         assert shorten("CAT") == "CT" #Test capital 'A'
