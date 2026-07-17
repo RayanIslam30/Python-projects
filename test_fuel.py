@@ -15,8 +15,11 @@ def test_convert():
 def test_value_error():
     with pytest.raises(ValueError): #Check that it doesn't take non-integers
         convert("cat/dog")
+    with pytest.raises(ValueError): #Check x cannot be negative
         convert("-1/2")
+    with pytest.raises(ValueError): #Check y cannot be negative
         convert("1/-2")
+    with pytest.raises(ValueError): #Check fraction cannot be greater than 1
         convert("2/1")
 
 #Test for ZeroDivisionError in convert function
