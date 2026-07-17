@@ -11,13 +11,20 @@ elif len(sys.argv) == 1: #If sys.argv[1] doesn't exist, quit with too few argume
 else: #If there are more than 1 argument, quit with too many arguments
     sys.exit("Too many command-line arguments")
 
-#Make sure the file is actually a .py file
+#Make sure the file is actually a .py file, otherwise quit
 if not name.endswith(".py"):
     sys.exit("Not a Python file")
-#Open the file and read it
-with open(name) as file:
-#
-    for line in file: 
-        lines+=1 
+
+
+
+#If all checks pass, then open the file and read it
+try:
+    with open(name) as file:
+       for line in file: 
+            lines+=1 
+except FileNotFoundError: #If file doesn't exist, quit 
+    sys.exit("File does not exist")
+
+
 
 print(lines)
