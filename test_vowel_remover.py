@@ -1,14 +1,8 @@
-#Code to test our vowel_remover program
+#Code to test our vowel_remover program using pytest
 from vowel_remover import shorten #Test the shorten function in vowel_remover
 
-def main(): 
-    test_shorten()
 #Our test of the shorten function
 def test_shorten():
-    if shorten("cat") != "ct":
-        print("cat was not shortened to ct")
-    if shorten("CAT") != "CT":
-        print("CAT was not shortened to CT")
-
-if __name__ == "__main__": #Only run main if file ran directly
-    main()
+        assert shorten("cat") == "ct" #Test lowercase 'a'
+        assert shorten("CAT") == "CT" #Test capital 'A'
+        assert shorten("aeiouAEIOU") == "" #Test all vowels removed
