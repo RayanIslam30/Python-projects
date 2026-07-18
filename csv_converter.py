@@ -31,7 +31,6 @@ try:
             last, first = row["name"].split(",")
             first = first.strip()
             house = row["house"]
-            print(first, last, house)
             #After seperating the values, put it into our new file
             with open(output, "a") as file: #appends our data so that we can safely add more to an existing file if we want (kind of bad design to do so but it's okay)
                 writer = csv.writer(file)
