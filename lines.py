@@ -30,4 +30,4 @@ try:
 except FileNotFoundError: #If file doesn't exist, quit 
     sys.exit("File does not exist")
 
-print(lines)#Print our amount of lines
+print(f"{name} has {lines} lines.")#Print our amount of lines
