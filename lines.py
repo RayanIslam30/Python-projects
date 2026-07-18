@@ -17,7 +17,7 @@ if not name.endswith(".py"):
 
 
 
-#If all checks pass, then open the file and read it
+#If all previous checks pass, then open the file and read it
 try:
     with open(name) as file:
        for line in file: 
@@ -27,7 +27,7 @@ try:
                 pass
             else: #Otherwise, count it
                 lines+=1 
-except FileNotFoundError: #If file doesn't exist, quit 
+except FileNotFoundError: #If file cannot be found, then quit
     sys.exit("File does not exist")
 
-print(f"{name} has {lines} lines.")#Print our amount of lines
+print(f"{name} has {lines} lines.")
