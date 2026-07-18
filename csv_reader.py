@@ -13,7 +13,7 @@ elif len(sys.argv) == 1: #If sys.argv[1] doesn't exist, quit with too few argume
 else: #If there are more than 1 argument, quit with too many arguments
     sys.exit("Too many command-line arguments")
 
-#Make sure the file is actually a .py file, otherwise quit
+#Make sure the file is actually a .csv file, otherwise quit
 if not name.endswith(".csv"):
     sys.exit("Not a CSV file")
 

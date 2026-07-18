@@ -11,3 +11,9 @@ elif len(sys.argv) < 3: #If sys.argv[1] or [2] doesn't exist, quit with too few 
     sys.exit("Too few command-line arguments")
 else: #If there are more than 2 arguments, quit with too many arguments
     sys.exit("Too many command-line arguments")
+
+#Make sure the file is actually a .csv file, otherwise quit
+if not name.endswith(".csv"):
+    sys.exit("Not a CSV file")
+
+    
