@@ -13,13 +13,13 @@ else: #If there are more than 2 arguments, quit with too many arguments
     sys.exit("Too many command-line arguments")
 
 #Make sure both files are actually a .csv file, otherwise quit
-if not name.endswith(".csv") or not output.endswith("csv"):
+if not name.endswith(".csv") or not output.endswith(".csv"):
     sys.exit("Not a CSV file")
 
 
 #Now, put our header on the new csv file
 header = ['first', 'last', 'house']
-with open(output,"a") as file:
+with open(output,"w") as file:
     writer = csv.writer(file)
     writer.writerow(header)
     
@@ -32,7 +32,7 @@ try:
             first = first.strip()
             house = row["house"]
             #After seperating the values, put it into our new file
-            with open(output, "a") as file: #appends our data so that we can safely add more to an existing file if we want (kind of bad design to do so but it's okay)
+            with open(output, "a") as file: #appends our data so we can keep header intact 
                 writer = csv.writer(file)
                 writer.writerow([first, last, house])
 except FileNotFoundError: #If the file doesn't actually exist, give error
