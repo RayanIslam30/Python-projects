@@ -36,7 +36,7 @@ try:
             with open(output, "a") as file: #appends our data so that we can safely add more to an existing file if we want (kind of bad design to do so but it's okay)
                 writer = csv.writer(file)
                 writer.writerow([first, last, house])
-except FileNotFoundError:
+except FileNotFoundError: #If the file doesn't actually exist, give error
     sys.exit("File does not exist")
 
 
