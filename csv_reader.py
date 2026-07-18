@@ -1,4 +1,4 @@
-#Code to take a .csv file with three values per row and put it into a more readable table
+#Code to take a .csv file and put it into a more readable table
 
 import sys #Import sys to use sys.argv and take system arguments
 import csv #Import csv module to work with our csv files
@@ -21,9 +21,6 @@ if not name.endswith(".csv"):
 try:
     with open(name) as file: 
         reader = csv.reader(file) #use csv reader to cleanly access the csv file
-        #for first, second, third in reader:
-            #csv_data.append({"first":first, "second": second, "third": third})
+        print(tabulate(reader, headers="firstrow", tablefmt="grid")) #Use tabulate to print out a nice table
 except FileNotFoundError: #If file cannot be found, then quit
     sys.exit("File does not exist")
-
-print(tabulate(csv_data, headers="keys", tablefmt="grid")) #Use tabulate to print out a nice table
