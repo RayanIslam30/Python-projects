@@ -1,6 +1,6 @@
 #Code to check the amount of lines another program has, not including comments or whitespace
 
-import sys #Import sys to use sys.argv
+import sys #Import sys to use sys.argv and take system arguments
 lines = int(0) #Initialize our count of lines in the program
 
 #Check that sys.argv[1] exists
