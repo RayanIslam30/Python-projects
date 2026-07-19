@@ -27,3 +27,8 @@ if input_ext != output_ext: #If input ending is not equal to output ending, quit
 #If all those checks passed, start the overlay process
 shirt = Image.open("images/shirt.png") #Get the shirt image from images folder
 
+with Image.open("images/shirt.png") as img: #Open the image to get info on it
+    size = (img.size) #Get size so we can set the input image to this size
+
+input = img.size()
+
