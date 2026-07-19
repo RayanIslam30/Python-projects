@@ -24,11 +24,13 @@ if input_ext not in [".jpg", ".jpeg", ".png"] or output_ext not in [".jpg", ".jp
 if input_ext != output_ext: #If input ending is not equal to output ending, quit
     sys.exit("Input and output have different extensions")
 
+#Try to open the image. If the image doesn't exist, then quit
+try:
+    photo = Image.open(input)
+except FileNotFoundError:
+    sys.exit("Input file does not exist")
+
 #If all those checks passed, start the overlay process
 shirt = Image.open("images/shirt.png") #Get the shirt image from images folder
-
-with Image.open("images/shirt.png") as img: #Open the image to get info on it
-    size = (img.size) #Get size so we can set the input image to this size
-
-input = img.size()
+size = shirt.size #Store the size of our shirt image
 
