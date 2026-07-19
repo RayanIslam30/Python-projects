@@ -1,5 +1,5 @@
 #Code that takes 2 images, and overlays one on top of the other
-#In my case, it will be used to overlay Harvards 'I took CS50' shirt onto my cat
+#In my case, it will be used to overlay Harvards 'I took CS50' shirt onto my cat 
 
 import sys #Import sys to use sys.argv and take system arguments
 import os #Import os to check file extensions
@@ -33,4 +33,10 @@ except FileNotFoundError:
 #If all those checks passed, start the overlay process
 shirt = Image.open("images/shirt.png") #Get the shirt image from images folder
 size = shirt.size #Store the size of our shirt image
+
+photo = ImageOps.fit(photo, size) #make our image the same size as the shirt image
+
+photo.paste(shirt, shirt) #Overlays the shirt image. Asks twice, first time for image and second time for what pixels to change
+
+photo.save(output) #Save the photo to our output file
 
