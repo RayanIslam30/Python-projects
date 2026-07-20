@@ -1,7 +1,5 @@
 # Code that takes HTML output from youtube, and gives back just a sharable url to go to that video on youtube
 import re
-import sys
-
 
 def main():
     print(
