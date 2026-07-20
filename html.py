@@ -9,8 +9,8 @@ def main():
 
 def parse(html):
     #Check if we have long or short output
-    short = 
-
+    if short := re.search(r'<iframe.*?src="https?://(?:www\.)?youtube\.com/embed/([^"]+)"', html): #Check if our string meets all requirements for short html
+        return f"https://youtu.be/{short.group(1)}"
 
 if __name__ == "__main__": #Only run if called directly
     main()
