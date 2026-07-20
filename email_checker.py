@@ -5,10 +5,11 @@ from validator_collection import is_email  # From the validator_collection modul
 def main():
     print(email(input("What's your email address? ")))
 
+#Use is_email to check for a valid email format (not necessarily real email, but right formatting)
 def email(email):
-    if is_email(email):
-        return "Valid"
-    else:
+    if is_email(email): #If true, valid
+        return "Valid" 
+    else: #If false, invalid
         return "Invalid"
 
 if __name__ == "__main__":
