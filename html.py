@@ -9,10 +9,10 @@ def main():
 
 def parse(html):
     # Same check for short and long input
-    if short := re.search(
+    if html := re.search(
         r'<iframe.*?src="https?://(?:www\.)?youtube\.com/embed/([^"]+)"', html
     ):  # Check if html formatted right, get the link embed and ignore everything else
-        return f"https://youtu.be/{short.group(1)}"
+        return f"https://youtu.be/{html.group(1)}"
     else:  # Otherwise, not valid
         return "None"
 
