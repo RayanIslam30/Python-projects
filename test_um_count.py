@@ -8,6 +8,7 @@ from um_count import count #Import the count function from um
 def test_um_count(): #Run normal test
     assert count("um") == 1 
     assert count("um um um") == 3
+    assert count("UM Um uM um") == 4
 
 def test_um_words(): #Test including other words and punctuation
     assert count("hello, um, world") == 1 
