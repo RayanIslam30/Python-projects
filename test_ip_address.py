@@ -4,7 +4,7 @@ from Ip_address import validate #Import the validate function from Ip_address
 
 #Our tests for the validate function
 
-def test_value():
+def test_validate():
     assert validate("255.255.255.255") == "Valid" #Valid IP address is valid
     assert validate("0.153.194.255") == "Valid" #Another Valid IP address is valid
     assert validate("0.0.0.0.") == "Invalid" #An extra '.' will make invalid
