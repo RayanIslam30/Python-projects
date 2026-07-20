@@ -7,8 +7,8 @@ def main():
 
 
 def convert(time):
-    
-
+    if time := re.search(r"^(\d{1,2}|\d{1,2}:\d{2}) (AM|PM) to (\d{1,2}|\d{1,2}:\d{2}) (AM|PM)$", time, re.IGNORECASE): #Check that user inputted what should be a valid time
+        return "works"
 
 ...
 
