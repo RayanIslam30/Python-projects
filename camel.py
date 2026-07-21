@@ -19,4 +19,5 @@ def camel_to_snake(camel_str):
     return snake_str.lstrip("_")
 
 
-main()
+if __name__ == "__main__":  # Only run main if file ran directly
+    main()
