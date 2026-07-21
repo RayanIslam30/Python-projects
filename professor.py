@@ -54,5 +54,5 @@ def generate_integer(level):
         return int
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": #only run if called directly
     main()
