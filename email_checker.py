@@ -12,5 +12,5 @@ def email(email):
     else: #If false, invalid
         return "Invalid"
 
-if __name__ == "__main__":
+if __name__ == "__main__": #Only run if called directly
     main()
