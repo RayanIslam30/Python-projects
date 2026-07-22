@@ -15,7 +15,7 @@ def calculate(date):
         try:
             datetime.date(year,month,day) #Check if we have a valid date
         except(ValueError):
-            ...
+            return("Invalid date")
     else: #If not, invalid
         return("Invalid date")
     
