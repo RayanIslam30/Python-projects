@@ -7,18 +7,18 @@ def main():
     print(calculate(input("Date: ")))
 
 def calculate(date):
-    if date.count("-") == 2:
-        year, month, day = date.split("-")
+    if date.count("-") == 2: #Check if format is at least close to what we want
+        year, month, day = date.split("-") #Split into year, month, day by splitting at '-'
         year = int(year)
         month = int(month)
         day = int(day)
-        datetime.date(year,month,day)
-    else:
+        try:
+            datetime.date(year,month,day) #Check if we have a valid date
+        except(ValueError):
+            ...
+    else: #If not, invalid
         return("Invalid date")
     
-
-
-...
 
 
 if __name__ == "__main__": #Only run main if file ran directly
