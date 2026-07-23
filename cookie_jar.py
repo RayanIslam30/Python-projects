@@ -2,8 +2,8 @@
 
 class Jar: 
     def __init__(self, capacity = 12): 
-        self._capacity = capacity #Get our capacity, _ for please don't touch
-        if capacity != 12: #If our capacity got messed with, raise ValueError
+        self._capacity = capacity #Get our capacity, put in _ to differentiate from normal capacity variable
+        if capacity < 0: #If our capacity is negative now, raise ValueError
             raise ValueError
         self._size = 0 #Start with 0 cookies in, _ for please don't touch
 
@@ -18,7 +18,7 @@ class Jar:
     def withdraw(self, n): #Remove cookies from jar
         if (n > self._size) or (n < 0): #If we try to remove more cookies than we have in the jar, or if n is negative, raise ValueError
             raise ValueError
-        self.n -= n #Otherwise, remove cookies
+        self._size -= n #Otherwise, remove cookies
 
     @property
     def capacity(self): #Return capacity
