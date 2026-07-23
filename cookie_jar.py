@@ -2,27 +2,29 @@
 
 class Jar: 
     def __init__(self, capacity = 12): 
-        self._capacity = capacity #Get out capacity
-        if capacity != 12: #If our capacity got messed with, 
+        self._capacity = capacity #Get our capacity, _ for please don't touch
+        if capacity != 12: #If our capacity got messed with, raise ValueError
             raise ValueError
-        self._size = 0 #Start with 0 cookies in 
+        self._size = 0 #Start with 0 cookies in, _ for please don't touch
 
     def __str__(self): #Print out a cookie emoji for each cookie in jar
-        return "🍪" * self._size #For each cookie in the jar, return a cookie emoji
+        return "🍪" * self._size #For each cookie in the jar, return a cookie emoji. This assumes everything is good, no error checking
 
     def deposit(self, n): #Add cookies to jar
-
-        self.n = n 
-
+        if self._size + n > self._capacity: #If we go over our capacity, raise ValueError
+            raise ValueError
+        self._size += n #Otherwise, add cookies
 
     def withdraw(self, n): #Remove cookies from jar
-        self.n = n
+        if (n > self._size) or (n < 0): #If we try to remove more cookies than we have in the jar, or if n is negative, raise ValueError
+            raise ValueError
+        self.n -= n #Otherwise, remove cookies
 
     @property
-    def capacity(self):
-        ...
+    def capacity(self): #Return capacity
+        return self._capacity
 
     @property
-    def size(self):
-        ...
+    def size(self): #Return size
+        return self._size
 
