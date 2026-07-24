@@ -2,16 +2,28 @@
 
 from fpdf import FPDF #Module to write text onto image
 
-pdf = FPDF(orientation="P", format="A4") #Get a blank A4 portrait page
-pdf.add_page()
+def main():
+    shirt(input("Enter full name: "))
 
-pdf.set_font("Helvetica", size=30) #Set the font to Helvetica 
-pdf.ln(5) #Move down 5 mm
-pdf.cell(w=0,text="Test string", align="C") #Print this string at the top center of the page
+def shirt(name):
+    pdf = FPDF(orientation="P", format="A4") #Get a blank A4 portrait page
+    pdf.add_page()
 
+#Print our header
+    pdf.set_font("Helvetica", size=50) #Set the font to Helvetica 
+    pdf.ln(15) #Move down 15 mm
+    pdf.cell(w=0,text="CS50 Shirtificate", align="C") #Print this string at the top center of the page
 
+#Put our blank shirt image
+    pdf.ln(20) #Move down 20 mm
+    pdf.image("images/shirt_template.png", x=11,y=70, w=190)
 
-pdf.set_font("Helvetica", "B", size=20) #Set font to Helvetica bold, smaller
-pdf.set_text_color(255,255,255) #Set text color to white
+#Print text on shirt
+    pdf.ln(85) #Move down 85 mm
+    pdf.set_font("Helvetica", size=20) #Set font to Helvetica bold, smaller
+    pdf.set_text_color(255,255,255) #Set text color to white
+    pdf.cell(w=200, text=f"{name} took CS50", align="C")
+    pdf.output("images/shirtificate.pdf")
 
-pdf.output("images/test.pdf")
+if __name__ == "__main__": #Only run main if called directly
+    main()
