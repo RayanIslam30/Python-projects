@@ -9,20 +9,24 @@ import random #Import the random module to randomly generate moves for the compu
 
 
 def main():
-    ...
+    draw_board
 
-
+#Used to draw the board with X and O in proper spots
 def draw_board():
     ...
 
-
+#
 def get_user_move():
     ...
 
+#Only used for a second human player
+def get_user2_move():
+    ...
 
+#Logic for our computer moves on all three difficulties
 def get_com_move(mode):
     ...
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": #Only run main if called directly, allows us to test functions
     main()
