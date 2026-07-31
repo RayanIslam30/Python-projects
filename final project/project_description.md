@@ -13,7 +13,7 @@
     I used a class for most of logic,
         The Board class has methods for printing out the board, displaying moves on that board, checking if those moves are valid, and checking for a win or tie. 
         Each square on the board is stored in a list, allowing for each square to be easily changed to either and X or O, and simplify checking if a square is occupied or not. Making the board a class makes the code more simple and easy to read, since almost every function calls to the board.
-        At first, each square was initially empty, and I would print out instructions at the start, but I decided to instead label each square with the number the user can input to occupy that square.
+        At first, each square was initially empty, and I would print out instructions at the start so the user would know how to play, but I decided to instead label each square with the number the user can input to occupy that square.
         To check for a win, we check if all three squares in a row, column, or diagonal are occupied by one player.
         Similar logic is used to check for a full board to determine a tie, checking that every square is occupied by either player.
         When checking for a valid move, we check if the index for that square in our list has either an X or O, meaning it is already taken. 
