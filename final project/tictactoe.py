@@ -35,29 +35,31 @@ class Board:
 
 board = Board() 
 def main():
-    player = False #Initialize player
+    player = False #Initialize variable to check if we have two player mode enabled or not
     print("How to play: ") #Instructions on how it works
-    while True: #Loop until we get a valid difficulty or two-player mode is selected
-        mode = input("Choose difficulty: ").lower().strip() #User chooses initial difficulty
-        if mode == "2p" or mode == "two-player":
+    while True: #Loop until we get a valid difficulty or two player mode is selected
+        mode = input("Choose difficulty (easy, normal, hard): ").lower().strip() #User chooses initial difficulty
+        if mode == "2p" or mode == "two-player" or mode =="two player": #Check for two player mode
             player = True
             break
-        elif mode == "easy" or mode == "normal" or mode =="hard":
+        elif mode == "easy" or mode == "normal" or mode =="hard": #If valid difficulty entered, break
             break
     play_game(player, mode)
 
 #Get where user wants to place their X, check if that placement is legal.
 def get_user_move(board):
-    while True:
+    while True: #Get user position, keep going until we get valid input
         try:
-            position = int(input("Player 1 (X), enter your move (1-9):"))
+            position = int(input("Player 1 (X), enter your move:"))
             if 1 <= position <= 9:
+                break
+            elif position in board.available_moves(): #Check that the position is unoccupied
                 break
             else:
                 pass
         except(ValueError):
             pass
-
+    
 #Only used for a second human player, get where they want to place their O, check if that placement is legal.
 def get_user2_move(board):
     ...
