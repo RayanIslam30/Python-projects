@@ -10,7 +10,9 @@ import random #Import the random module to randomly generate moves for the compu
 #Initialize a class to handle our board function
 class Board:
     def __init__(self): #Initialize the board
-        self.board = [" "] * 9
+        self.board = ["1", "2", "3",
+                      "4", "5", "6",
+                      "7", "8", "9"]
     
     def display(self): #Display the board
         print(f" {self.board[0]} | {self.board[1]} | {self.board[2]}")
@@ -32,8 +34,8 @@ class Board:
         ...
 
 board = Board() 
-
 def main():
+    player = False #Initialize player
     print("How to play: ") #Instructions on how it works
     while True: #Loop until we get a valid difficulty or two-player mode is selected
         mode = input("Choose difficulty: ").lower().strip() #User chooses initial difficulty
@@ -42,30 +44,35 @@ def main():
             break
         elif mode == "easy" or mode == "normal" or mode =="hard":
             break
-    print("\n") #New line for spacing
-    board.display() #Display the initial board
-
-
-
+    play_game(player, mode)
 
 #Get where user wants to place their X, check if that placement is legal.
 def get_user_move(board):
-    ...
+    while True:
+        try:
+            position = int(input("Player 1 (X), enter your move (1-9):"))
+            if 1 <= position <= 9:
+                break
+            else:
+                pass
+        except(ValueError):
+            pass
 
 #Only used for a second human player, get where they want to place their O, check if that placement is legal.
-def get_user2_move():
+def get_user2_move(board):
     ...
 
 #Logic for our computer moves on all three difficulties
 def get_computer_move(board, mode):
     ...
 
-
 #The main gameplay loop. Different logic for player vs computer and player vs player, and checks for win or tie after every move. Gets difficulty 
 def play_game(player, mode):
     if player: #If two player mode
         while True:
-            board.display()
+            print("\n") #New line for spacing
+            board.display() 
+            print("\n") #new line for spacing
 
         # Player 1's turn
             get_user_move(board)
@@ -84,9 +91,13 @@ def play_game(player, mode):
 
     # Check for tie
             ...
+
+            break #temporary break to prevent infinite loop
     else: #If player vs computer
         while True:
+            print("\n") #new line for spacing
             board.display()
+            print("\n") #new line for spacing
 
         # Player's turn
             get_user_move(board)
@@ -106,6 +117,6 @@ def play_game(player, mode):
         # Check for tie
             ...
         
-
+            break #temporary break to prevent infinite loop
 if __name__ == "__main__": #Only run main if called directly, allows us to test functions
     main()
