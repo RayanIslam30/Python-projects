@@ -5,21 +5,34 @@
 #Normal mode uses weighted random choice to make 'smarter' moves, make sure to win when able
 #Hard mode will always pick the best possible move
 
-import random #Import the random module to randomly generate moves for the computer
+import random #Import the random module to randomly generate moves for the computer 
+#Color codes for terminal output
+BLUE = "\033[34m"
+RED = "\033[31m"
+GREEN = "\033[32m"
+RESET = "\033[0m"
 
+def color_square(square):
+    if square == "X":
+        return f"{BLUE}X{RESET}"
+    elif square == "O":
+        return f"{RED}O{RESET}"
+    else:
+        return square
+    
 #Initialize a class to handle our board function
 class Board:
     def __init__(self): #Initialize the board state
         self.board = ["1", "2", "3",
                       "4", "5", "6",
                       "7", "8", "9"]
-    
+        
     def display(self): #Display the board 
-        print(f" {self.board[0]} | {self.board[1]} | {self.board[2]}")
+        print(f" {color_square(self.board[0])} | {color_square(self.board[1])} | {color_square(self.board[2])}")
         print("---+---+---")
-        print(f" {self.board[3]} | {self.board[4]} | {self.board[5]}")
+        print(f" {color_square(self.board[3])} | {color_square(self.board[4])} | {color_square(self.board[5])}")
         print("---+---+---")
-        print(f" {self.board[6]} | {self.board[7]} | {self.board[8]}")
+        print(f" {color_square(self.board[6])} | {color_square(self.board[7])} | {color_square(self.board[8])}")
 
     def make_move(self, position, player): #Change a blank square to an X for player or O for computer/player 2
             self.board[position] = player
@@ -27,7 +40,7 @@ class Board:
     def available_moves(self): #Available spaces to move
         moves = [] #Create a list of available moves
         for i, square in enumerate(self.board):
-            if square.isnumeric:
+            if square.isnumeric():
                 moves.append(i)
         return moves
 
@@ -61,7 +74,9 @@ def main():
             break
         elif mode == "easy" or mode == "normal" or mode =="hard": #If valid difficulty entered, break
             break
-    play_game(player2, mode)
+        else: #Otherwise, ask for valid input
+            print("Please choose a valid mode.")
+    print(play_game(player2, mode))
 
 #Get where user wants to place their X, check if that placement is legal.
 def get_user_move(board):
@@ -72,20 +87,39 @@ def get_user_move(board):
 
             if position in board.available_moves(): #Check that the position is unoccupied
                 break
-            elif 0<=position<=8:
+            elif 0<=position<=8: #Check that they inputed a valid square
                 print("That square is already occupied.")
-            else:
+            else: #Otherwise, invalid square
                 print("Please choose valid square.")
-        except(ValueError):
+        except(ValueError): #If they inputed a non-integer, catch the error and ask for valid square
             print("Please choose valid square.")
-    board.make_move((position), "X") 
+    board.make_move((position), "X") #Make the move, color the X blue for better visibility
 #Only used for a second human player, get where they want to place their O, check if that placement is legal.
 def get_user2_move(board):
-    ...
+    while True: #Get user position, keep going until we get valid input
+        try:
+            position = int(input("Player 2 (O), enter your move: "))
+            position-=1 #Our value is actually 0 indexed, so lower number by 1
+
+            if position in board.available_moves(): #Check that the position is unoccupied
+                break
+            elif 0<=position<=8: #Check that they inputed a valid square
+                print("That square is already occupied.")
+            else: #Otherwise, invalid square
+                print("Please choose valid square.")
+        except(ValueError): #If they inputed a non-integer, catch the error and ask for valid square
+            print("Please choose valid square.")
+    board.make_move((position), "O") #Make the move, color the O red for better visibility
 
 #Logic for our computer moves on all three difficulties
 def get_computer_move(board, mode):
-    ...
+    if mode == "easy": #Easy mode, just randomly choose a square to place on
+        position = random.choice(board.available_moves())
+        board.make_move(position, "O")
+    elif mode == "normal": #Normal mode, use weighted random choice and a flowchart design to make 'smarter' moves, make sure to win when able
+        ... 
+    elif mode == "hard": #Hard mode will always pick the best possible move using minimax algorithm
+        ...
 
 #The main gameplay loop. Different logic for player vs computer and player vs player, and checks for win or tie after every move. Gets difficulty 
 def play_game(player2, mode): 
@@ -99,6 +133,7 @@ def play_game(player2, mode):
             get_user_move(board)
             print("\n") #new line for spacing
             board.display() #Display board with player's move 
+            print("\n") #new line for spacing
         # Check if player 1 won
             winner = board.check_winner() #Check for a winner   
             if winner:
