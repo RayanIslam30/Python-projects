@@ -6,6 +6,7 @@
 #Hard mode will always pick the best possible move
 
 import random #Import the random module to randomly generate moves for the computer 
+import time #Import the time module to add a delay for the computer's move to make it feel more natural
 
 #Color codes for terminal output
 BLUE = "\033[34m"
@@ -23,6 +24,34 @@ def color_square(square):
 
 def is_valid_move(board, position):
     return position in board.available_moves()
+
+#Minimax algorithm to determine the best possible move for the computer in hard mode, evaluates all possible moves and future turns to determine the best move for the computer
+def minimax(board, depth, is_maximizing):
+    winner = board.check_winner() #Check if the simulated board has a winner
+    if winner:
+        if winner == "O": #If computer wons, return a score of 1
+            return 1
+        elif winner == "X": #If player wins, return a score of -1
+            return -1
+    elif board.is_full(): #Check if the board is full and return a score of 0 for a tie
+        return 0
+
+    if is_maximizing: #If it's the computer's turn, try to maximize the score
+        best_score = -float('inf') #Initialize best score to negative infinity, so any score will be better than it
+        for move in board.available_moves(): #Iterate through all available moves
+            board.make_move(move, "O")
+            score = minimax(board, depth + 1, False) #Recursively call minimax to simulate the player's turn, and get the score for that move
+            board.make_move(move, str(move+1)) #Reset the square back to its original value
+            best_score = max(score, best_score) #If the score is better than the best score, update best score
+        return best_score
+    else: #Simulate the player's turn, assume they try to minimize the score for the computer, so we minimize the score
+        best_score = float('inf')
+        for move in board.available_moves():
+            board.make_move(move, "X")
+            score = minimax(board, depth + 1, True)
+            board.make_move(move, str(move+1))
+            best_score = min(score, best_score)
+        return best_score
     
 #Initialize a class to handle our board function
 class Board:
@@ -119,10 +148,51 @@ def get_user2_move(board):
 def get_computer_move(board, mode):
     if mode == "easy": #Easy mode, just randomly choose a square to place on
         position = random.choice(board.available_moves())
+        print ("Computer is thinking...")
+        time.sleep(1) #Add a delay to make it feel more natural
         board.make_move(position, "O")
     elif mode == "normal": #Normal mode, use weighted random choice and a flowchart design to make 'smarter' moves, make sure to win when able
-        ... 
+        #Iterate through all available moves, check if any of them will result in a win for the computer, if so, make that move
+        print ("Computer is thinking...")
+        time.sleep(2) #Add a delay to make it feel more natural, longer delay than easy mode to make it feel like the computer is thinking harder
+        for move in board.available_moves():
+            board.make_move(move, "O")
+            if board.check_winner():
+                return
+            else:
+                board.make_move(move, str(move+1)) #Reset the square back to its original value if it doesn't result in a win
+        #Iterate through all available moves, check if any of them will result in a win for the player, if so, block that move
+        for move in board.available_moves():
+            board.make_move(move, "X")
+            if board.check_winner():
+                board.make_move(move, "O") #Block the player's winning move
+                return
+            else:
+                board.make_move(move, str(move+1)) #Reset the square back to its original value if it doesn't result in a win
+        #If no winning or blocking moves available, try to claim the center square if available, otherwise pick a random corner square, otherwise pick a random square
+        if 4 in board.available_moves(): #Check if center square is available
+            board.make_move(4, "O")
+        elif any(move in board.available_moves() for move in [0, 2, 6, 8]): #Check if any corner squares are available
+            corners = [move for move in [0, 2, 6, 8] if move in board.available_moves()]
+            position = random.choice(corners)
+            board.make_move(position, "O")
+        else: #Otherwise, pick a random square
+            sides = [move for move in [1, 3, 5, 7] if move in board.available_moves()]
+            position = random.choice(sides)
+            board.make_move(position, "O")
     elif mode == "hard": #Hard mode will always pick the best possible move using minimax algorithm
+        print ("Computer is thinking...")
+        time.sleep(3) #Add a delay to make it feel more natural, longer delay than easy and normal mode to make it feel like the computer is thinking harder
+        best_score = -float('inf') #Initialize best score to negative infinity, so any score will be better than it
+        best_move = None #Initialize best move to None
+        for move in board.available_moves(): #Iterate through all available moves
+            board.make_move(move, "O") #Make the move
+            score = minimax(board, 0, False) #Get the score for that move using minimax algorithm
+            board.make_move(move, str(move+1)) #Reset the square back to its original value
+            if score > best_score: #If the score is better than the best score, update best score and best move
+                best_score = score
+                best_move = move
+        board.make_move(best_move, "O") #Make the best move
         ...
 
 #The main gameplay loop. Different logic for player vs computer and player vs player, and checks for win or tie after every move. Gets difficulty 

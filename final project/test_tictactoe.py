@@ -1,10 +1,20 @@
 #Code to test that the tic-tac-toe program is worked as expected
-from tictactoe import get_computer_move, color_square, Board, is_valid_move #Import our functions to test, only test functions that don't require user input
+from tictactoe import play_game,get_computer_move, color_square, Board, is_valid_move #Import our functions to test, only test functions that don't require user input
 
 def test_get_computer_move(): #Check that computer is working right
-    assert get_computer_move(Board(), "easy") in range(9) #Check that the computer is making a valid move
-    assert get_computer_move(Board(), "medium") in range(9) #Check that the computer is making a valid move
-    assert get_computer_move(Board(), "hard") in range(9) #Check that the computer is making a valid move
+    board = Board() #Initialize the board class
+    get_computer_move(board, "easy") #Get computer move on easy mode
+    assert board.board.count("X") == 0 #Check that the computer didn't make a move for the player
+    assert board.board.count("O") == 1 #Check that the computer made a move for the computer
+    assert len(board.available_moves()) == 8 #Check that the computer made a move and there are now 8 available moves
+    get_computer_move(board, "normal") #Get computer move on normal mode
+    assert board.board.count("X") == 0 #Check that the computer didn't make a move for the player
+    assert board.board.count("O") == 2 #Check that the computer made a move for the computer
+    assert len(board.available_moves()) == 7 #Check that the computer made a move and there are now 7 available moves
+    get_computer_move(board, "hard") #Get computer move on hard mode
+    assert board.board.count("X") == 0 #Check that the computer didn't make a move for the player
+    assert board.board.count("O") == 3 #Check that the computer made a move for the computer
+    assert len(board.available_moves()) == 6 #Check that the computer made a move and there are now 6 available moves
 
 def test_is_valid_move(): #Check that the is_valid_move function is working right
     board = Board() #Initialize the board class
