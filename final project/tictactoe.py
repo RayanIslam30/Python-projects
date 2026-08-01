@@ -6,12 +6,13 @@
 #Hard mode will always pick the best possible move
 
 import random #Import the random module to randomly generate moves for the computer 
+
 #Color codes for terminal output
 BLUE = "\033[34m"
 RED = "\033[31m"
-GREEN = "\033[32m"
 RESET = "\033[0m"
 
+#Functions to help make code easier, color the X and O for better visibility, and check if a move is valid
 def color_square(square):
     if square == "X":
         return f"{BLUE}X{RESET}"
@@ -19,6 +20,9 @@ def color_square(square):
         return f"{RED}O{RESET}"
     else:
         return square
+
+def is_valid_move(board, position):
+    return position in board.available_moves()
     
 #Initialize a class to handle our board function
 class Board:
@@ -85,7 +89,7 @@ def get_user_move(board):
             position = int(input("Player 1 (X), enter your move: "))
             position-=1 #Our value is actually 0 indexed, so lower number by 1
 
-            if position in board.available_moves(): #Check that the position is unoccupied
+            if is_valid_move(board, position): #Check that the position is valid
                 break
             elif 0<=position<=8: #Check that they inputed a valid square
                 print("That square is already occupied.")
@@ -93,7 +97,7 @@ def get_user_move(board):
                 print("Please choose valid square.")
         except(ValueError): #If they inputed a non-integer, catch the error and ask for valid square
             print("Please choose valid square.")
-    board.make_move((position), "X") #Make the move, color the X blue for better visibility
+    board.make_move((position), "X") #Make the move
 #Only used for a second human player, get where they want to place their O, check if that placement is legal.
 def get_user2_move(board):
     while True: #Get user position, keep going until we get valid input
@@ -101,7 +105,7 @@ def get_user2_move(board):
             position = int(input("Player 2 (O), enter your move: "))
             position-=1 #Our value is actually 0 indexed, so lower number by 1
 
-            if position in board.available_moves(): #Check that the position is unoccupied
+            if is_valid_move(board, position): #Check that the position is valid
                 break
             elif 0<=position<=8: #Check that they inputed a valid square
                 print("That square is already occupied.")
@@ -109,7 +113,7 @@ def get_user2_move(board):
                 print("Please choose valid square.")
         except(ValueError): #If they inputed a non-integer, catch the error and ask for valid square
             print("Please choose valid square.")
-    board.make_move((position), "O") #Make the move, color the O red for better visibility
+    board.make_move((position), "O") #Make the move
 
 #Logic for our computer moves on all three difficulties
 def get_computer_move(board, mode):

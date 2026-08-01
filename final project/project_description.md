@@ -3,7 +3,7 @@
     #### Description:
     A python script that allows the user to play Tic-Tac-Toe against a computer from the command-line.
 
-        I also decided to implement a way for two people to play against each other, activated by the user typing two-player or 2p during difficulty selection. Player 1 always uses X, while player 2 uses O.
+        I also decided to implement a way for two people to play against each other, activated by the user typing two-player or 2p during difficulty selection. Player 1 always uses X, while player 2 uses O. Escape codes are used to color X blue, and color O red.
         
     Before the game, the user is able to choose from 3 difficulties for the computer: Easy, Normal, and Hard. 
         - The easy mode computer chooses moves completely at random, making it simple even for beginners. 
