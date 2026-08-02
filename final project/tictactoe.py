@@ -12,6 +12,7 @@ import time #Import the time module to add a delay for the computer's move to ma
 BLUE = "\033[34m"
 RED = "\033[31m"
 YELLOW = "\033[33m"
+BOLD = "\033[1m"
 RESET = "\033[0m"
 
 #Functions to help make code easier, color the X and O for better visibility, and check if a move is valid
@@ -106,7 +107,7 @@ board = Board()
 def main():
     player2 = False #Initialize variable to check if we have two player mode enabled or not
     while True: #Loop until we get a valid difficulty or two player mode is selected
-        mode = input("Choose mode (easy, normal, hard, or two-player): ").lower().strip() #User chooses initial difficulty
+        mode = input(f"{BOLD}Choose mode (easy, normal, hard, or two-player): {RESET}").lower().strip() #User chooses initial difficulty
         if mode == "2p" or mode == "two-player" or mode =="two player": #Check for two player mode
             player2 = True
             break
@@ -120,7 +121,7 @@ def main():
 def get_user_move(board):
     while True: #Get user position, keep going until we get valid input
         try:
-            position = int(input("Player 1 (X), enter your move: "))
+            position = int(input(f"{BOLD}Player 1 (X), enter your move: {RESET}"))
             position-=1 #Our value is actually 0 indexed, so lower number by 1
 
             if is_valid_move(board, position): #Check that the position is valid
@@ -136,7 +137,7 @@ def get_user_move(board):
 def get_user2_move(board):
     while True: #Get user position, keep going until we get valid input
         try:
-            position = int(input("Player 2 (O), enter your move: "))
+            position = int(input(f"{BOLD}Player 2 (O), enter your move: {RESET}"))
             position-=1 #Our value is actually 0 indexed, so lower number by 1
 
             if is_valid_move(board, position): #Check that the position is valid
@@ -153,13 +154,13 @@ def get_user2_move(board):
 def get_computer_move(board, mode):
     if mode == "easy": #Easy mode, just randomly choose a square to place on
         position = random.choice(board.available_moves())
-        print ("Computer is thinking...")
+        print (f"{BOLD}Computer is thinking...{RESET}")
         time.sleep(0.5) #Add a delay to make it feel more natural
         board.make_move(position, "O")
 
     elif mode == "normal": #Normal mode, use weighted random choice and a flowchart design to make 'smarter' moves, make sure to win when able
         #Iterate through all available moves, check if any of them will result in a win for the computer, if so, make that move
-        print ("Computer is thinking...")
+        print (f"{BOLD}Computer is thinking...{RESET}")
         time.sleep(1) #Add a delay to make it feel more natural, longer delay than easy mode to make it feel like the computer is thinking harder
         for move in board.available_moves():
             board.make_move(move, "O") #Iterate through all available moves, check if any of them will result in a win for the computer, if so, make that move
@@ -188,7 +189,7 @@ def get_computer_move(board, mode):
             board.make_move(position, "O")
 
     elif mode == "hard": #Hard mode will always pick the best possible move using minimax algorithm
-        print ("Computer is thinking...")
+        print (f"{BOLD}Computer is thinking...{RESET}")
         time.sleep(1.5) #Add a delay to make it feel more natural, longer delay than easy and normal mode to make it feel like the computer is thinking harder
         best_score = -float('inf') #Initialize best score to negative infinity, so any score will be better than it
         best_move = None #Initialize best move to None
@@ -260,6 +261,7 @@ def play_game(player2, mode):
             get_computer_move(board, mode)
             print("\n") #new line for spacing
             board.display() #Display board with computer's move
+            print("\n") #new line for spacing
 
         # Check if computer won
             winner = board.check_winner()
