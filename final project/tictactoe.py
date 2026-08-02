@@ -25,15 +25,17 @@ def color_square(square):
 def is_valid_move(board, position):
     return position in board.available_moves()
 
-#Minimax algorithm to determine the best possible move for the computer in hard mode, evaluates all possible moves and future turns to determine the best move for the computer
+#Minimax algorithm to determine the best possible move for the computer in hard mode
+#A recursive algorithm that simulates all possible moves and their outcomes
+#Chooses the move that maximizes the computer's chances of winning while minimizing the player's chances of winning
 def minimax(board, depth, is_maximizing):
     winner = board.check_winner() #Check if the simulated board has a winner
     if winner:
-        if winner == "O": #If computer wons, return a score of 1
+        if winner == "O": #If computer wons, return a score of 1, good outcome for the computer
             return 1
-        elif winner == "X": #If player wins, return a score of -1
+        elif winner == "X": #If player wins, return a score of -1, bad outcome for the computer
             return -1
-    elif board.is_full(): #Check if the board is full and return a score of 0 for a tie
+    elif board.is_full(): #Check if the board is full and return a score of 0 for a tie, neutral outcome for the computer
         return 0
 
     if is_maximizing: #If it's the computer's turn, try to maximize the score
@@ -46,11 +48,11 @@ def minimax(board, depth, is_maximizing):
         return best_score
     else: #Simulate the player's turn, assume they try to minimize the score for the computer, so we minimize the score
         best_score = float('inf')
-        for move in board.available_moves():
+        for move in board.available_moves(): #Iterate through all available moves
             board.make_move(move, "X")
-            score = minimax(board, depth + 1, True)
-            board.make_move(move, str(move+1))
-            best_score = min(score, best_score)
+            score = minimax(board, depth + 1, True) #Recursively call minimax to simulate the computer's turn, and get the score for that move
+            board.make_move(move, str(move+1)) #Reset the square back to its original value
+            best_score = min(score, best_score) #If the score is better than the best score, update best score
         return best_score
     
 #Initialize a class to handle our board function

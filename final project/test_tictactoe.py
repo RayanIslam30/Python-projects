@@ -1,5 +1,5 @@
 #Code to test that the tic-tac-toe program is worked as expected
-from tictactoe import play_game,get_computer_move, color_square, Board, is_valid_move #Import our functions to test, only test functions that don't require user input
+from tictactoe import get_computer_move, color_square, Board, is_valid_move #Import our functions to test, only test functions that don't require user input
 
 def test_get_computer_move(): #Check that computer is working right
     board = Board() #Initialize the board class
@@ -15,7 +15,7 @@ def test_get_computer_move(): #Check that computer is working right
     assert board.board.count("X") == 0 #Check that the computer didn't make a move for the player
     assert board.board.count("O") == 3 #Check that the computer made a move for the computer
     assert len(board.available_moves()) == 6 #Check that the computer made a move and there are now 6 available moves
-
+    
 def test_is_valid_move(): #Check that the is_valid_move function is working right
     board = Board() #Initialize the board class
     assert is_valid_move(board, 0) == True #Check that a valid move returns True
