@@ -11,6 +11,7 @@ import time #Import the time module to add a delay for the computer's move to ma
 #Color codes for terminal output
 BLUE = "\033[34m"
 RED = "\033[31m"
+YELLOW = "\033[33m"
 RESET = "\033[0m"
 
 #Functions to help make code easier, color the X and O for better visibility, and check if a move is valid
@@ -44,7 +45,8 @@ def minimax(board, depth, is_maximizing):
             board.make_move(move, "O")
             score = minimax(board, depth + 1, False) #Recursively call minimax to simulate the player's turn, and get the score for that move
             board.make_move(move, str(move+1)) #Reset the square back to its original value
-            best_score = max(score, best_score) #If the score is better than the best score, update best score
+            if score > best_score: #If the score is better than the best score, update best score
+                best_score = score
         return best_score
     else: #Simulate the player's turn, assume they try to minimize the score for the computer, so we minimize the score
         best_score = float('inf')
@@ -52,7 +54,8 @@ def minimax(board, depth, is_maximizing):
             board.make_move(move, "X")
             score = minimax(board, depth + 1, True) #Recursively call minimax to simulate the computer's turn, and get the score for that move
             board.make_move(move, str(move+1)) #Reset the square back to its original value
-            best_score = min(score, best_score) #If the score is better than the best score, update best score
+            if score < best_score: #If the score is better than the best score, update best score
+                best_score = score
         return best_score
     
 #Initialize a class to handle our board function
@@ -151,14 +154,15 @@ def get_computer_move(board, mode):
     if mode == "easy": #Easy mode, just randomly choose a square to place on
         position = random.choice(board.available_moves())
         print ("Computer is thinking...")
-        time.sleep(1) #Add a delay to make it feel more natural
+        time.sleep(0.5) #Add a delay to make it feel more natural
         board.make_move(position, "O")
+
     elif mode == "normal": #Normal mode, use weighted random choice and a flowchart design to make 'smarter' moves, make sure to win when able
         #Iterate through all available moves, check if any of them will result in a win for the computer, if so, make that move
         print ("Computer is thinking...")
-        time.sleep(2) #Add a delay to make it feel more natural, longer delay than easy mode to make it feel like the computer is thinking harder
+        time.sleep(1) #Add a delay to make it feel more natural, longer delay than easy mode to make it feel like the computer is thinking harder
         for move in board.available_moves():
-            board.make_move(move, "O")
+            board.make_move(move, "O") #Iterate through all available moves, check if any of them will result in a win for the computer, if so, make that move
             if board.check_winner():
                 return
             else:
@@ -182,29 +186,29 @@ def get_computer_move(board, mode):
             sides = [move for move in [1, 3, 5, 7] if move in board.available_moves()]
             position = random.choice(sides)
             board.make_move(position, "O")
+
     elif mode == "hard": #Hard mode will always pick the best possible move using minimax algorithm
         print ("Computer is thinking...")
-        time.sleep(3) #Add a delay to make it feel more natural, longer delay than easy and normal mode to make it feel like the computer is thinking harder
+        time.sleep(1.5) #Add a delay to make it feel more natural, longer delay than easy and normal mode to make it feel like the computer is thinking harder
         best_score = -float('inf') #Initialize best score to negative infinity, so any score will be better than it
         best_move = None #Initialize best move to None
         for move in board.available_moves(): #Iterate through all available moves
             board.make_move(move, "O") #Make the move
-            score = minimax(board, 0, False) #Get the score for that move using minimax algorithm
+            score = minimax(board, 0, False) #Get the score for that move using minimax algorithm, starting with the player's turn next, so is_maximizing is False
             board.make_move(move, str(move+1)) #Reset the square back to its original value
             if score > best_score: #If the score is better than the best score, update best score and best move
                 best_score = score
                 best_move = move
         board.make_move(best_move, "O") #Make the best move
-        ...
 
 #The main gameplay loop. Different logic for player vs computer and player vs player, and checks for win or tie after every move. Gets difficulty 
 def play_game(player2, mode): 
     if player2: #If two player mode
-        while True: #Loop until we get a winner or tie
-            print("\n") #New line for spacing
-            board.display() 
-            print("\n") #new line for spacing
-
+        print("\n") #New line for spacing
+        board.display() 
+        print("\n") #new line for spacing
+        #Loop until we get a winner or tie, check for win or tie after every move
+        while True: 
         # Player 1's turn
             get_user_move(board)
             print("\n") #new line for spacing
@@ -213,53 +217,58 @@ def play_game(player2, mode):
         # Check if player 1 won
             winner = board.check_winner() #Check for a winner   
             if winner:
-                return("Player 1 wins!")
+                return(f"{BLUE}Player 1 wins!{RESET}")
         # Check for tie
             if board.is_full():
-                return("It's a tie!")
+                return(f"{YELLOW}It's a tie!{RESET}")
 
         # Player 2's turn
             get_user2_move(board)
+            print("\n") #new line for spacing
             board.display() #Display board with player's move
     # Check if player 2 won
             winner = board.check_winner() #Check for a winner   
             if winner:
-                return("Player 2 wins!")
+                return(f"{BLUE}Player 2 wins!{RESET}")
 
     # Check for tie
             if board.is_full():
-                return("It's a tie!")
+                return(f"{YELLOW}It's a tie!{RESET}")
 
     else: #If player vs computer
-        while True: #Loop until we get a winner or tie
-            print("\n") #new line for spacing
-            board.display()
-            print("\n") #new line for spacing
+        print("\n") #new line for spacing
+        board.display()
+        print("\n") #new line for spacing
 
+        #Loop until we get a winner or tie, check for win or tie after every move
+        while True:
         # Player's turn
             get_user_move(board)
+            print("\n") #new line for spacing
             board.display() #Display board with player's move
+            print("\n") #new line for spacing
         # Check if player won
             winner = board.check_winner()
             if winner:
-                return("Player wins!")
+                return(f"{BLUE}Player wins!{RESET}") 
 
         # Check for tie
             if board.is_full():
-                return("It's a tie!")
+                return(f"{YELLOW}It's a tie!{RESET}")
 
         # Computer's turn
             get_computer_move(board, mode)
+            print("\n") #new line for spacing
             board.display() #Display board with computer's move
 
         # Check if computer won
             winner = board.check_winner()
             if winner:
-                return("Computer wins!")
+                return(f"{RED}Computer wins!{RESET}")
 
         # Check for tie
             if board.is_full():
-                return("It's a tie!")
+                return(f"{YELLOW}It's a tie!{RESET}")
         
 if __name__ == "__main__": #Only run main if called directly, allows us to test functions
     main()
