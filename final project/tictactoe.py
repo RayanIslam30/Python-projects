@@ -32,10 +32,10 @@ def is_valid_move(board, position):
 def minimax(board, depth, is_maximizing):
     winner = board.check_winner() #Check if the simulated board has a winner
     if winner:
-        if winner == "O": #If computer wons, return a score of 1, good outcome for the computer
-            return 1
-        elif winner == "X": #If player wins, return a score of -1, bad outcome for the computer
+        if is_maximizing: #If it's the computer's turn next, return a score of -1, bad outcome for the computer, they lost
             return -1
+        elif not is_maximizing: #If it's the player's turn next, return a score of 1, good outcome for the computer, they won
+            return 1
     elif board.is_full(): #Check if the board is full and return a score of 0 for a tie, neutral outcome for the computer
         return 0
 
