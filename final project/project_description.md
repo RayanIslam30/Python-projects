@@ -1,5 +1,5 @@
     # Project title: CLI Tic-Tac-Toe
-    #### Video Demo:  <URL HERE>
+    #### Video Demo: https://youtu.be/Bamkw7BNwrs
     #### Description:
     A python script that allows the user to play Tic-Tac-Toe against a computer from the command-line.
 
