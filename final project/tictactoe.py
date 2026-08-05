@@ -252,7 +252,7 @@ def play_game(player2, mode):
             # Check if player 2 won
             winner = board.check_winner()  # Check for a winner
             if winner:
-                return f"{BLUE}Player 2 wins!{RESET}"
+                return f"{RED}Player 2 wins!{RESET}"
 
             # Check for tie
             if board.is_full():
